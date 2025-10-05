@@ -42,10 +42,24 @@ const CartItem = ({ onContinueShopping }) => {
 
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
-    const unitCost = parseFloat(item.cost.substring(1));
-    return (item.quantity * unitCost).toFixed(2);
+    return (item) => {
+        const unitCost = parseFloat(item.cost.substring(1));
+        return (item.quantity * unitCost).toFixed(2);
+    };
   };
 
+
+  if (cart.length === 0) {
+    return (
+      <div className="cart-container" style={{ textAlign: 'center', marginTop: '50px' }}>
+        <h2 style={{ color: 'black' }}>Your shopping cart is empty.</h2>
+        <button className="get-started-button" onClick={handleContinueShopping} style={{ marginTop: '20px' }}>
+          Continue Shopping
+        </button>
+      </div>
+    );
+  }
+  
   return (
     <div className="cart-container">
       <h2 style={{ color: 'black' }}>Total Cart Amount: ${calculateTotalAmount()}</h2>
